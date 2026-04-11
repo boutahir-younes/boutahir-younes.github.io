@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Younes Boutahir — Data Scientist & ML Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #0f0f1a;
+  --bg3: #141428;
+  --purple: #7c3aed;
+  --purple-light: #a855f7;
+  --purple-dim: rgba(124,58,237,0.15);
+  --purple-glow: rgba(124,58,237,0.4);
+  --text: #f0f0ff;
+  --text-muted: #8888aa;
+  --border: rgba(124,58,237,0.25);
+  --card: rgba(15,15,30,0.8);
+  --radius: 16px;
+  --nav-h: 70px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--purple) var(--bg);}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+/* NOISE TEXTURE */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:0.4;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;
+  background:rgba(10,10,15,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,var(--purple),var(--purple-light));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:#fff;
+  cursor:pointer;flex-shrink:0;
+}
+.nav-links{display:flex;align-items:center;gap:8px;list-style:none;}
+.nav-links a{
+  color:var(--text-muted);text-decoration:none;
+  font-size:14px;font-weight:500;
+  padding:8px 16px;border-radius:8px;
+  transition:all 0.2s;
+}
+.nav-links a:hover,.nav-links a.active{
+  color:var(--text);background:var(--purple-dim);
+}
+.nav-links a.active{background:var(--purple);color:#fff;}
+.nav-toggle{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:50%;width:38px;height:38px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--purple-light);font-size:16px;transition:all 0.2s;
+}
+.nav-toggle:hover{background:var(--purple-dim);}
+
+/* SECTIONS */
+section{padding:100px 5%;position:relative;}
+
+/* HOME */
+#home{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding-top:calc(var(--nav-h) + 40px);
+  gap:60px;
+}
+.home-content{flex:1;}
+.home-greeting{
+  font-family:'DM Mono',monospace;
+  color:var(--purple-light);font-size:15px;
+  margin-bottom:16px;letter-spacing:2px;
+}
+.home-name{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(42px,6vw,80px);
+  font-weight:800;line-height:1.05;
+  margin-bottom:16px;
+}
+.home-name span{
+  background:linear-gradient(135deg,var(--purple-light),#c084fc,#e879f9);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.home-role{
+  display:inline-block;
+  border:1px solid var(--border);
+  border-radius:30px;padding:10px 24px;
+  font-size:15px;font-weight:500;
+  color:var(--text-muted);margin-bottom:24px;
+  background:var(--purple-dim);
+}
+.home-desc{
+  font-size:16px;line-height:1.8;color:var(--text-muted);
+  max-width:520px;margin-bottom:40px;
+}
+.home-btns{display:flex;gap:16px;flex-wrap:wrap;}
+.btn-primary{
+  background:var(--purple);color:#fff;
+  padding:14px 28px;border-radius:12px;
+  text-decoration:none;font-weight:600;font-size:15px;
+  transition:all 0.3s;border:none;cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{background:var(--purple-light);transform:translateY(-2px);box-shadow:0 8px 30px var(--purple-glow);}
+.btn-outline{
+  border:1px solid var(--border);color:var(--text);
+  padding:14px 28px;border-radius:12px;
+  text-decoration:none;font-weight:500;font-size:15px;
+  transition:all 0.3s;background:transparent;cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-outline:hover{border-color:var(--purple);background:var(--purple-dim);transform:translateY(-2px);}
+.home-visual{
+  flex:0 0 320px;
+  position:relative;
+}
+.home-photo-wrap{
+  width:300px;height:380px;border-radius:24px;
+  overflow:hidden;position:relative;
+  border:1px solid var(--border);
+}
+.home-photo-wrap img{width:100%;height:100%;object-fit:cover;}
+.home-photo-placeholder{
+  width:100%;height:100%;
+  background:linear-gradient(135deg,var(--bg3),var(--bg2));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:80px;font-weight:800;
+  color:var(--purple-dim);letter-spacing:-4px;
+}
+.home-badge{
+  position:absolute;bottom:-20px;right:-20px;
+  background:var(--purple);border-radius:14px;
+  padding:14px 18px;font-size:12px;font-weight:600;
+  color:#fff;white-space:nowrap;
+  box-shadow:0 8px 30px var(--purple-glow);
+}
+.typing-wrap{
+  font-family:'DM Mono',monospace;
+  color:var(--purple-light);font-size:16px;
+  margin-bottom:20px;min-height:24px;
+}
+.cursor{animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* STATS */
+.stats-row{
+  display:flex;gap:32px;margin-top:40px;flex-wrap:wrap;
+}
+.stat{
+  text-align:center;
+}
+.stat-num{
+  font-family:'Syne',sans-serif;font-size:28px;font-weight:800;
+  color:var(--purple-light);
+}
+.stat-label{font-size:12px;color:var(--text-muted);}
+
+/* SECTION HEADER */
+.section-header{text-align:center;margin-bottom:60px;}
+.section-tag{
+  font-family:'DM Mono',monospace;
+  color:var(--purple-light);font-size:13px;
+  letter-spacing:3px;margin-bottom:12px;
+}
+.section-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(32px,4vw,52px);font-weight:800;
+  margin-bottom:16px;
+}
+.section-title span{
+  background:linear-gradient(135deg,var(--purple-light),#e879f9);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.section-desc{color:var(--text-muted);font-size:16px;max-width:500px;margin:0 auto;}
+
+/* ABOUT */
+#about{background:var(--bg2);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.about-text p{color:var(--text-muted);line-height:1.9;font-size:16px;margin-bottom:16px;}
+.about-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
+.about-tag{
+  background:var(--purple-dim);border:1px solid var(--border);
+  border-radius:8px;padding:8px 16px;
+  font-size:13px;color:var(--purple-light);font-weight:500;
+}
+.about-cards{display:flex;flex-direction:column;gap:16px;}
+.about-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;
+  transition:border-color 0.3s;
+}
+.about-card:hover{border-color:var(--purple);}
+.about-card-icon{font-size:24px;margin-bottom:10px;}
+.about-card h4{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;}
+.about-card p{font-size:13px;color:var(--text-muted);line-height:1.6;}
+
+/* SKILLS */
+#skills{}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
+.skill-category{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:28px;
+  transition:all 0.3s;
+}
+.skill-category:hover{border-color:var(--purple);transform:translateY(-4px);}
+.skill-cat-title{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:15px;
+  color:var(--purple-light);margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.skill-cat-icon{font-size:20px;}
+.skills-list{display:flex;flex-wrap:wrap;gap:10px;}
+.skill-pill{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:8px;padding:8px 14px;
+  font-size:13px;color:var(--text-muted);font-weight:500;
+  transition:all 0.2s;display:flex;align-items:center;gap:6px;
+}
+.skill-pill:hover{border-color:var(--purple);color:var(--text);background:var(--purple-dim);}
+.skill-dot{width:6px;height:6px;border-radius:50%;background:var(--purple-light);flex-shrink:0;}
+
+/* PROJECTS */
+#projects{background:var(--bg2);}
+.projects-filter{
+  display:flex;justify-content:center;gap:12px;margin-bottom:48px;flex-wrap:wrap;
+}
+.filter-btn{
+  padding:10px 22px;border-radius:30px;
+  border:1px solid var(--border);background:transparent;
+  color:var(--text-muted);font-size:14px;font-weight:500;
+  cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;
+}
+.filter-btn:hover,.filter-btn.active{
+  background:var(--purple);border-color:var(--purple);color:#fff;
+}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:28px;}
+.project-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  transition:all 0.3s;display:flex;flex-direction:column;
+}
+.project-card:hover{border-color:var(--purple);transform:translateY(-6px);box-shadow:0 20px 60px rgba(124,58,237,0.2);}
+.project-preview{
+  height:200px;
+  background:linear-gradient(135deg,var(--bg3),var(--bg2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:48px;border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.project-preview::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(124,58,237,0.1),transparent);
+}
+.coming-soon-badge{
+  position:absolute;top:16px;right:16px;
+  background:rgba(0,0,0,0.6);border:1px solid var(--border);
+  border-radius:20px;padding:4px 12px;
+  font-family:'DM Mono',monospace;font-size:11px;color:var(--text-muted);
+}
+.project-body{padding:24px;flex:1;display:flex;flex-direction:column;}
+.project-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;}
+.project-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;}
+.project-links{display:flex;gap:8px;}
+.project-link{
+  width:34px;height:34px;border-radius:8px;
+  border:1px solid var(--border);background:var(--bg3);
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;color:var(--text-muted);font-size:14px;
+  transition:all 0.2s;
+}
+.project-link:hover{border-color:var(--purple);color:var(--purple-light);background:var(--purple-dim);}
+.project-desc{font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:16px;flex:1;}
+.project-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.project-tag{
+  font-family:'DM Mono',monospace;
+  font-size:11px;color:var(--purple-light);
+  background:var(--purple-dim);border:1px solid rgba(124,58,237,0.3);
+  border-radius:6px;padding:4px 10px;
+}
+
+/* CONTACT */
+#contact{}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.contact-info h3{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;margin-bottom:16px;}
+.contact-info p{color:var(--text-muted);line-height:1.8;margin-bottom:32px;}
+.contact-items{display:flex;flex-direction:column;gap:16px;}
+.contact-item{
+  display:flex;align-items:center;gap:16px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:16px 20px;
+  transition:border-color 0.2s;
+}
+.contact-item:hover{border-color:var(--purple);}
+.contact-item-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--purple-dim);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.contact-item-text{font-size:14px;}
+.contact-item-label{color:var(--text-muted);font-size:12px;margin-bottom:2px;}
+.contact-item-value{color:var(--text);font-weight:500;}
+.contact-socials{display:flex;gap:12px;margin-top:24px;}
+.social-btn{
+  flex:1;padding:14px;border-radius:12px;
+  border:1px solid var(--border);background:var(--card);
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  text-decoration:none;color:var(--text-muted);font-size:14px;font-weight:500;
+  transition:all 0.2s;
+}
+.social-btn:hover{border-color:var(--purple);color:var(--text);background:var(--purple-dim);}
+.contact-form{display:flex;flex-direction:column;gap:20px;}
+.form-group{display:flex;flex-direction:column;gap:8px;}
+.form-label{font-size:14px;font-weight:500;color:var(--text-muted);}
+.form-input,.form-textarea{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:12px;padding:14px 18px;
+  color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;
+  transition:border-color 0.2s;outline:none;
+}
+.form-input:focus,.form-textarea:focus{border-color:var(--purple);}
+.form-textarea{resize:vertical;min-height:140px;}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text-muted);}
+
+/* FOOTER */
+footer{
+  background:var(--bg2);border-top:1px solid var(--border);
+  padding:32px 5%;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+.footer-text{font-size:14px;color:var(--text-muted);}
+.footer-text span{color:var(--purple-light);}
+.back-top{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--purple);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;text-decoration:none;font-size:16px;
+  transition:all 0.2s;
+}
+.back-top:hover{background:var(--purple-light);transform:translateY(-2px);}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:32px;}
+.timeline::before{
+  content:'';position:absolute;left:0;top:8px;bottom:8px;
+  width:2px;background:linear-gradient(to bottom,var(--purple),transparent);
+}
+.timeline-item{position:relative;margin-bottom:36px;}
+.timeline-dot{
+  position:absolute;left:-38px;top:4px;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--purple);
+  box-shadow:0 0 0 4px var(--purple-dim);
+}
+.timeline-date{
+  display:inline-block;background:var(--purple);
+  border-radius:20px;padding:4px 14px;
+  font-family:'DM Mono',monospace;font-size:12px;
+  color:#fff;margin-bottom:10px;
+}
+.timeline-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;margin-bottom:4px;}
+.timeline-sub{font-size:14px;color:var(--text-muted);}
+
+/* GLOW BG */
+.glow{
+  position:absolute;border-radius:50%;filter:blur(80px);
+  pointer-events:none;z-index:0;
+}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.7s cubic-bezier(0.16,1,0.3,1);}
+.reveal.visible{opacity:1;transform:none;}
+
+/* MOBILE */
+@media(max-width:768px){
+  #home{flex-direction:column;text-align:center;}
+  .home-btns{justify-content:center;}
+  .home-visual{display:none;}
+  .about-grid,.contact-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .stats-row{justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="scrollTo(0,0)">YB</div>
+  <ul class="nav-links">
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-toggle" onclick="toggleTheme()" title="Toggle theme">☀</div>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+  <div style="position:absolute;top:20%;left:10%;width:400px;height:400px;background:rgba(124,58,237,0.08);border-radius:50%;filter:blur(80px);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:10%;right:5%;width:300px;height:300px;background:rgba(232,121,249,0.06);border-radius:50%;filter:blur(80px);pointer-events:none;"></div>
+
+  <div class="home-content">
+    <div class="home-greeting">// Hello World</div>
+    <h1 class="home-name">
+      Hi, I'm<br><span>Younes Boutahir</span>
+    </h1>
+    <div class="typing-wrap">
+      <span id="typed"></span><span class="cursor">|</span>
+    </div>
+    <div class="home-role">🎓 Master SIDI — FST Errachidia</div>
+    <p class="home-desc">
+      Passionate about building intelligent systems that solve real-world problems.
+      Specializing in Machine Learning, Computer Vision and Deep Learning.
+      Open to Data Science internship — Summer 2026.
+    </p>
+    <div class="home-btns">
+      <a href="cv.pdf" download class="btn-primary">⬇ Download CV</a>
+      <a href="#projects" class="btn-outline">View Projects →</a>
+      <a href="#contact" class="btn-outline">Contact Me</a>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num">2+</div><div class="stat-label">Projects</div></div>
+      <div class="stat"><div class="stat-num">95%</div><div class="stat-label">MLP Accuracy</div></div>
+      <div class="stat"><div class="stat-num">2026</div><div class="stat-label">Internship Ready</div></div>
+    </div>
+  </div>
+
+  <div class="home-visual">
+    <div class="home-photo-wrap">
+      <img src="photo.png" alt="Younes Boutahir" style="width:100%;height:100%;object-fit:cover;"/>
+    </div>
+    <div class="home-badge">🚀 Open to Internship 2026</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <div class="section-tag">// ABOUT ME</div>
+    <h2 class="section-title">Who <span>I Am</span></h2>
+  </div>
+  <div class="about-grid">
+    <div class="reveal">
+      <p>I'm a Master student in <strong style="color:var(--text)">Decision-Making & Imaging Information Systems (SIDI)</strong> at FST Errachidia, Moulay Ismail University.</p>
+      <p>I specialize in building intelligent, data-driven systems — from custom neural networks implemented from scratch to computer vision applications. My goal is to bridge the gap between research and real-world impact.</p>
+      <p>Currently exploring <strong style="color:var(--text)">Computer Vision</strong> with OpenCV, <strong style="color:var(--text)">LLM Engineering</strong> and advanced Deep Learning architectures.</p>
+      <div class="about-tags">
+        <span class="about-tag">Machine Learning</span>
+        <span class="about-tag">Deep Learning</span>
+        <span class="about-tag">Computer Vision</span>
+        <span class="about-tag">LLM Engineering</span>
+        <span class="about-tag">Python</span>
+        <span class="about-tag">Data Analysis</span>
+      </div>
+    </div>
+    <div class="about-cards reveal">
+      <div class="about-card">
+        <div class="about-card-icon">🎓</div>
+        <h4>Education</h4>
+        <div class="timeline" style="margin-top:16px;">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2024 — Present</div>
+            <div class="timeline-title">Master SIDI</div>
+            <div class="timeline-sub">FST Errachidia — Moulay Ismail University</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2021 — 2024</div>
+            <div class="timeline-title">Licence Génie Logiciel</div>
+            <div class="timeline-sub">FST Errachidia</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🎯</div>
+        <h4>Current Goals</h4>
+        <p>Data Science internship — Summer 2026 · Build a strong project portfolio · Master Computer Vision & LLM Engineering</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🌍</div>
+        <h4>Languages</h4>
+        <p>Arabic (native) · French (fluent) · English (professional)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <div class="section-tag">// SKILLS</div>
+    <h2 class="section-title">Languages <span>& Tools</span></h2>
+    <p class="section-desc">Technologies I work with to build intelligent systems</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-category reveal">
+      <div class="skill-cat-title"><span class="skill-cat-icon">💻</span>Languages</div>
+      <div class="skills-list">
+        <div class="skill-pill"><div class="skill-dot"></div>Python</div>
+        <div class="skill-pill"><div class="skill-dot"></div>Java</div>
+        <div class="skill-pill"><div class="skill-dot"></div>SQL</div>
+        <div class="skill-pill"><div class="skill-dot"></div>PHP</div>
+        <div class="skill-pill"><div class="skill-dot"></div>JavaScript</div>
+        <div class="skill-pill"><div class="skill-dot"></div>HTML/CSS</div>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-cat-title"><span class="skill-cat-icon">🧠</span>ML / Deep Learning</div>
+      <div class="skills-list">
+        <div class="skill-pill"><div class="skill-dot"></div>TensorFlow</div>
+        <div class="skill-pill"><div class="skill-dot"></div>PyTorch</div>
+        <div class="skill-pill"><div class="skill-dot"></div>Scikit-learn</div>
+        <div class="skill-pill"><div class="skill-dot"></div>Keras</div>
+        <div class="skill-pill"><div class="skill-dot"></div>HuggingFace</div>
+        <div class="skill-pill"><div class="skill-dot"></div>Custom MLP</div>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-cat-title"><span class="skill-cat-icon">👁</span>Computer Vision</div>
+      <div class="skills-list">
+        <div class="skill-pill"><div class="skill-dot"></div>OpenCV</div>
+        <div class="skill-pill"><div class="skill-dot"></div>Object Tracking</div>
+        <div class="skill-pill"><div class="skill-dot"></div>Image Processing</div>
+        <div class="skill-pill"><div class="skill-dot"></div>Feature Detection</div>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-cat-title"><span class="skill-cat-icon">📊</span>Data & Visualization</div>
+      <div class="skills-list">
+        <div class="skill-pill"><div class="skill-dot"></div>Pandas</div>
+        <div class="skill-pill"><div class="skill-dot"></div>NumPy</div>
+        <div class="skill-pill"><div class="skill-dot"></div>Matplotlib</div>
+        <div class="skill-pill"><div class="skill-dot"></div>Seaborn</div>
+        <div class="skill-pill"><div class="skill-dot"></div>Jupyter</div>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-cat-title"><span class="skill-cat-icon">⚙️</span>Tools & DevOps</div>
+      <div class="skills-list">
+        <div class="skill-pill"><div class="skill-dot"></div>Git & GitHub</div>
+        <div class="skill-pill"><div class="skill-dot"></div>Linux</div>
+        <div class="skill-pill"><div class="skill-dot"></div>VS Code</div>
+        <div class="skill-pill"><div class="skill-dot"></div>MySQL</div>
+        <div class="skill-pill"><div class="skill-dot"></div>Flask</div>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-cat-title"><span class="skill-cat-icon">🔐</span>Cybersecurity</div>
+      <div class="skills-list">
+        <div class="skill-pill"><div class="skill-dot"></div>Anomaly Detection</div>
+        <div class="skill-pill"><div class="skill-dot"></div>IoT Security</div>
+        <div class="skill-pill"><div class="skill-dot"></div>Network Analysis</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <div class="section-tag">// PROJECTS</div>
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+    <p class="section-desc">Work that showcases my skills in ML, Computer Vision and full-stack development</p>
+  </div>
+  <div class="projects-filter reveal">
+    <button class="filter-btn active">All Projects</button>
+    <button class="filter-btn">Deep Learning</button>
+    <button class="filter-btn">Computer Vision</button>
+    <button class="filter-btn">Full-Stack</button>
+  </div>
+  <div class="projects-grid">
+
+    <!-- MediConnect -->
+    <div class="project-card reveal">
+      <div class="project-preview">🏥</div>
+      <div class="project-body">
+        <div class="project-header">
+          <div class="project-title">MediConnect</div>
+          <div class="project-links">
+            <a href="https://github.com/boutahir-younes/MediConnect" target="_blank" class="project-link" title="GitHub">⌥</a>
+          </div>
+        </div>
+        <p class="project-desc">
+          Smart hospital management system with AI-powered disease prediction using a custom MLP model built from scratch with NumPy. Full-stack web app — PHP frontend, Flask REST API backend, MySQL database. Achieves over 95% accuracy on 41 disease classes.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Custom MLP</span>
+          <span class="project-tag">Flask</span>
+          <span class="project-tag">PHP</span>
+          <span class="project-tag">MySQL</span>
+          <span class="project-tag">NumPy</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Object Tracking - Coming Soon -->
+    <div class="project-card reveal">
+      <div class="project-preview" style="opacity:0.5;">
+        👁
+        <div class="coming-soon-badge">Coming Soon</div>
+      </div>
+      <div class="project-body">
+        <div class="project-header">
+          <div class="project-title" style="color:var(--text-muted);">Object Tracking — OpenCV</div>
+        </div>
+        <p class="project-desc">
+          Real-time object tracking system using multiple OpenCV trackers (CSRT, KCF, MOSSE). Frame-by-frame object following with bounding box visualization and tracker performance comparison.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">OpenCV</span>
+          <span class="project-tag">Computer Vision</span>
+          <span class="project-tag">CSRT</span>
+          <span class="project-tag">KCF</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- IoT Anomaly Detection - Coming Soon -->
+    <div class="project-card reveal">
+      <div class="project-preview" style="opacity:0.5;">
+        🔐
+        <div class="coming-soon-badge">Coming Soon</div>
+      </div>
+      <div class="project-body">
+        <div class="project-header">
+          <div class="project-title" style="color:var(--text-muted);">IoT Anomaly Detection</div>
+        </div>
+        <p class="project-desc">
+          Hybrid ML + Deep Learning system for detecting botnets and anomalies in IoT network traffic. Combines classical ML (Random Forest, SVM) with Deep Learning (LSTM, AutoEncoder) on the N-BaIoT dataset.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">LSTM</span>
+          <span class="project-tag">AutoEncoder</span>
+          <span class="project-tag">Random Forest</span>
+          <span class="project-tag">IoT Security</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--bg2);">
+  <div class="section-header reveal">
+    <div class="section-tag">// CONTACT</div>
+    <h2 class="section-title">Let's <span>Work Together</span></h2>
+    <p class="section-desc">Open to internship opportunities, collaborations and interesting projects</p>
+  </div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <h3>Get in Touch</h3>
+      <p>I'm currently looking for Data Science internship opportunities for Summer 2026. Whether you have a project in mind or just want to connect — feel free to reach out!</p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-item-icon">✉</div>
+          <div class="contact-item-text">
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value">boutahiryounes003@gmail.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div class="contact-item-text">
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-value">Morocco 🇲🇦</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🕐</div>
+          <div class="contact-item-text">
+            <div class="contact-item-label">Availability</div>
+            <div class="contact-item-value">Open to internship — Summer 2026</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-socials" style="margin-top:24px;">
+        <a href="https://linkedin.com/in/younes-boutahir" target="_blank" class="social-btn">in LinkedIn</a>
+        <a href="https://github.com/boutahir-younes" target="_blank" class="social-btn">⌥ GitHub</a>
+        <a href="https://twitter.com/BoutahirYounes" target="_blank" class="social-btn">𝕏 Twitter</a>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="contact-form">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input class="form-input" type="text" placeholder="John Doe"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-input" type="email" placeholder="your@email.com"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subject</label>
+          <input class="form-input" type="text" placeholder="Internship opportunity / Collaboration..."/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell me about your project or opportunity..."></textarea>
+        </div>
+        <button class="btn-primary" style="width:100%;justify-content:center;" onclick="sendMessage()">
+          ✉ Send Message
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-text">
+    © 2026 <span>Younes Boutahir</span> · Built with passion · Morocco 🇲🇦
+  </div>
+  <a href="#home" class="back-top">↑</a>
+</footer>
+
+<script>
+// TYPING ANIMATION
+const lines = [
+  'Data Scientist & ML Engineer',
+  'Computer Vision Enthusiast',
+  'LLM Engineering Explorer',
+  'Open to Internship 2026 🚀'
+];
+let li=0,ci=0,del=false;
+const el=document.getElementById('typed');
+function type(){
+  const cur=lines[li];
+  if(!del){
+    el.textContent=cur.slice(0,++ci);
+    if(ci===cur.length){del=true;setTimeout(type,2000);return;}
+  } else {
+    el.textContent=cur.slice(0,--ci);
+    if(ci===0){del=false;li=(li+1)%lines.length;}
+  }
+  setTimeout(type,del?40:80);
+}
+type();
+
+// SCROLL REVEAL
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// NAV ACTIVE
+const sections=document.querySelectorAll('section');
+const navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{
+    if(window.scrollY>=s.offsetTop-100)cur=s.id;
+  });
+  navLinks.forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+});
+
+// THEME TOGGLE
+let dark=true;
+function toggleTheme(){
+  dark=!dark;
+  if(!dark){
+    document.documentElement.style.setProperty('--bg','#f8f8ff');
+    document.documentElement.style.setProperty('--bg2','#f0f0fa');
+    document.documentElement.style.setProperty('--bg3','#e8e8f5');
+    document.documentElement.style.setProperty('--text','#1a1a2e');
+    document.documentElement.style.setProperty('--text-muted','#6666aa');
+    document.documentElement.style.setProperty('--card','rgba(240,240,250,0.8)');
+  } else {
+    document.documentElement.style.setProperty('--bg','#0a0a0f');
+    document.documentElement.style.setProperty('--bg2','#0f0f1a');
+    document.documentElement.style.setProperty('--bg3','#141428');
+    document.documentElement.style.setProperty('--text','#f0f0ff');
+    document.documentElement.style.setProperty('--text-muted','#8888aa');
+    document.documentElement.style.setProperty('--card','rgba(15,15,30,0.8)');
+  }
+}
+
+// FILTER BUTTONS
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// SEND MESSAGE
+function sendMessage(){
+  alert('Message sent! I will get back to you soon. 🚀');
+}
+</script>
+</body>
+</html>
