@@ -101,7 +101,7 @@ The site is deployed with GitHub Pages.
 
 ## Contact
 
-- Email: boutahiryounes003@gmail.com
+- Email: boutahir.younes1@gmail.com
 - LinkedIn: [linkedin.com/in/younes-boutahir](https://linkedin.com/in/younes-boutahir)
 - GitHub: [github.com/boutahir-younes](https://github.com/boutahir-younes)
 
