@@ -65,7 +65,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); }
+html { scroll-padding-top: calc(var(--nav-h) + 16px); }
 body {
   margin: 0;
   background: var(--bg);
@@ -238,7 +238,10 @@ img { max-width: 100%; }
 
 footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: 14px; }
 
-/* One entrance for the hero figure only; respects reduced motion */
+/* Certifications */
+.cert h3 { font-family: var(--font-head); font-weight: 600; font-size: 22px; line-height: 1.25; margin: 0 0 6px; letter-spacing: -0.01em; }
+.cert p { margin: 0 0 14px; color: var(--muted); max-width: 62ch; }
+
 @media (max-width: 860px) {
   .hero { padding: 48px 0 72px; }
   .hero .wrap { grid-template-columns: 1fr; gap: 48px; }
@@ -267,6 +270,7 @@ footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted)
           <li><a href="#projects">Projects</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#education">Education</a></li>
+          <li><a href="#certifications">Certifications</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -286,7 +290,8 @@ footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted)
         <p class="summary">
           I build and evaluate machine learning models, then connect them to APIs and interfaces that people can use.
           I am finishing a Master's degree in Decision-Making Information Systems and Imaging in Morocco,
-          and I am looking for an AI engineering internship.
+          and I hold the IBM AI Engineering Professional Certificate from Coursera.
+          I am looking for an AI engineering internship.
         </p>
         <div class="actions">
           <a class="btn btn-primary" href="CV.pdf" download="CV_BOUTAHIR_YOUNES.pdf">
@@ -448,6 +453,20 @@ footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted)
     </div>
   </section>
 
+  <section class="section" id="certifications">
+    <div class="wrap">
+      <h2>Certifications</h2>
+      <div class="cert">
+        <h3>IBM AI Engineering Professional Certificate</h3>
+        <p>Issued by IBM through Coursera.</p>
+        <!--
+          Add the year and your credential link when you have it, for example:
+          <a class="repo-link" href="YOUR_CREDENTIAL_URL" target="_blank" rel="noopener">Verify credential</a>
+        -->
+      </div>
+    </div>
+  </section>
+
   <section class="section contact" id="contact">
     <div class="wrap">
       <h2>Contact</h2>
@@ -506,10 +525,9 @@ footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted)
     targets.forEach(function (t) { if (t) io.observe(t); });
   }
 
-  /* Latent space illustration: one load animation, clusters settle into place */
+  /* Latent space illustration: drawn once, static */
   var svg = document.getElementById("latent");
   var NS = "http://www.w3.org/2000/svg";
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function mulberry(seed) {
     return function () {
@@ -546,8 +564,7 @@ footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted)
     });
   }
 
-  var dots = [];
-  classes.forEach(function (cl, ci) {
+  classes.forEach(function (cl) {
     for (var k = 0; k < cl.n; k++) {
       var x = Math.max(8, Math.min(392, cl.c[0] + gauss() * cl.s));
       var y = Math.max(8, Math.min(392, cl.c[1] + gauss() * cl.s));
@@ -556,23 +573,10 @@ footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted)
       dot.setAttribute("cx", "0");
       dot.setAttribute("cy", "0");
       dot.style.fill = cl.color;
-      var sx = rand() * 400, sy = rand() * 400;
-      dot.style.transform = reduce ? "translate(" + x + "px," + y + "px)" : "translate(" + sx + "px," + sy + "px)";
+      dot.style.transform = "translate(" + x + "px," + y + "px)";
       svg.appendChild(dot);
-      dots.push({ el: dot, x: x, y: y, delay: ci * 70 });
     }
   });
-
-  if (!reduce) {
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        dots.forEach(function (d) {
-          d.el.style.transition = "transform 1.6s cubic-bezier(.2,.7,.2,1) " + d.delay + "ms";
-          d.el.style.transform = "translate(" + d.x + "px," + d.y + "px)";
-        });
-      });
-    });
-  }
 })();
 </script>
 </body>
